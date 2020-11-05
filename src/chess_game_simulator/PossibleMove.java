@@ -122,25 +122,25 @@ public class PossibleMove {
     public String ExpectedPossibleMoves()
     {
         String outputString = " ";
-        String pieceName = piece.getPieceName();
+        String pieceName = piece.getPieceName().toLowerCase();
         switch (pieceName)
         {
-            case "King":
+            case "king":
                 outputString = KingMove();
                 break;
-            case "Queen":
+            case "queen":
                 outputString = QueenMove();
                 break;
-            case "Bishop":
+            case "bishop":
                 outputString = BishopMove();
                 break;
-            case "Rook":
+            case "rook":
                 outputString = RookMove();
                 break;
-            case "Knight":
+            case "horse":
                 outputString = KnightMove();
                 break;
-            case "Pawn":
+            case "pawn":
                 outputString = PawnMove();
                 break;
             default:
