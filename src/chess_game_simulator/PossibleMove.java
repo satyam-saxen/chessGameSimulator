@@ -3,7 +3,11 @@ package chess_game_simulator;
 public class PossibleMove {
     private Piece piece;
 
-    public static String KingMove(Piece piece)
+    public PossibleMove(Piece piece) {
+        this.piece = piece;
+    }
+
+    private String KingMove()
     {
         char row = piece.getRow();
         int column = piece.getColumn();
@@ -20,7 +24,7 @@ public class PossibleMove {
         return s;
     }
 
-    public static String KnightMove(Piece piece)
+    private String KnightMove()
     {
         char row = piece.getRow();
         int column = piece.getColumn();
@@ -37,7 +41,7 @@ public class PossibleMove {
         return s;
     }
 
-    public static String BishopMove(Piece piece)
+    private String BishopMove()
     {
         String possibleMoves="";
         char p = piece.getRow();
@@ -74,7 +78,7 @@ public class PossibleMove {
         return possibleMoves;
     }
 
-    public static String RookMove(Piece piece)
+    private String RookMove()
     {
         char p = piece.getRow();
         int q = piece.getColumn();
@@ -93,15 +97,15 @@ public class PossibleMove {
         return s;
     }
 
-    public static String QueenMove(Piece piece)
+    private String QueenMove()
     {
         String s = "";
-        s += BishopMove(piece);
-        s += RookMove(piece);
+        s += BishopMove();
+        s += RookMove();
         return s;
     }
 
-    public static String PawnMove(Piece piece)
+    private String PawnMove()
     {
         String s;
         char p = piece.getRow();
@@ -113,6 +117,36 @@ public class PossibleMove {
         }
         return "No Move Possible";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
                                             // AS VALID VERTICAL DIRECTION MOVE FOR PAWN
+    }
+
+    public String ExpectedPossibleMoves()
+    {
+        String outputString = " ";
+        String pieceName = piece.getPieceName();
+        switch (pieceName)
+        {
+            case "King":
+                outputString = KingMove();
+                break;
+            case "Queen":
+                outputString = QueenMove();
+                break;
+            case "Bishop":
+                outputString = BishopMove();
+                break;
+            case "Rook":
+                outputString = RookMove();
+                break;
+            case "Knight":
+                outputString = KnightMove();
+                break;
+            case "Pawn":
+                outputString = PawnMove();
+                break;
+            default:
+                System.out.println("No Valid Piece");
+        }
+        return outputString;
     }
 
 }
