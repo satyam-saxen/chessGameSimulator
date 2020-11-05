@@ -5,11 +5,11 @@ public class Game {
     {
 //        System.out.println("Hello World");
         Piece piece;
-        String s = "Knight A2";
+        String s = "Pawn A2";
         piece = Piece.getPiece(s);
 //        System.out.println(piece.getPieceName());
 //        System.out.println("Position - "+piece.getRow()+piece.getColumn());
-        String output = PossibleMove.KnightMove(piece);
+        String output = PossibleMove.PawnMove(piece);
         System.out.println(output);
     }
 
