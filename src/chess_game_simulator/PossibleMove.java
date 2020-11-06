@@ -104,7 +104,7 @@ public class PossibleMove {
             possibleValidMoves = ((char)(row+1) + Integer.toString(column)+" ");
             return possibleValidMoves;
         }
-        return "No Move Possible";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
+        return "No Move Possible, you are standing on the last row";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
                                             // AS VALID VERTICAL DIRECTION MOVE FOR PAWN
     }
 
