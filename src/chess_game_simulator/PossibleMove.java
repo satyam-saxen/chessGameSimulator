@@ -19,7 +19,7 @@ public class PossibleMove {
             int a=row + X[i];
             int b=column + Y[i];
             if(a>='A' && a<='H' && b>=1 && b<=8)
-                possibleValidMoves += ((char)a + Integer.toString(b)+" ");
+                possibleValidMoves += ((char)a + Integer.toString(b)+", ");
         }
         return possibleValidMoves;
     }
@@ -36,7 +36,7 @@ public class PossibleMove {
             int a=row + X[i];
             int b=column + Y[i];
             if(a>='A' && a<='H' && b>=1 && b<=8)
-                possibleValidMoves += ((char)a + Integer.toString(b)+" ");
+                possibleValidMoves += ((char)a + Integer.toString(b)+", ");
         }
         return possibleValidMoves;
     }
@@ -62,10 +62,10 @@ public class PossibleMove {
                 int a = row+i;
                 int b = column+i;
                 if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleValidMoves += ((char)a + Integer.toString(b) + " ");
+                    possibleValidMoves += ((char)a + Integer.toString(b) + ", ");
                 b = column-i;
                 if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleValidMoves += ((char)a + Integer.toString(b) + " ");
+                    possibleValidMoves += ((char)a + Integer.toString(b) + ", ");
             }
         }
         return possibleValidMoves;
@@ -79,12 +79,12 @@ public class PossibleMove {
         for(int i=1;i<=8;i++)
         {
             if(i!=column)
-                possibleValidMoves += (row + Integer.toString(i) +" ");
+                possibleValidMoves += (row + Integer.toString(i) +", ");
         }
         for(int i='A';i<='H';i++)
         {
             if(i!=row)
-                possibleValidMoves += (((char)i) + Integer.toString(column) +" ");
+                possibleValidMoves += (((char)i) + Integer.toString(column) +", ");
         }
         return possibleValidMoves;
     }
@@ -101,7 +101,7 @@ public class PossibleMove {
         int column = piece.getColumn();
         if(row+1<='H')
         {
-            possibleValidMoves = ((char)(row+1) + Integer.toString(column)+" ");
+            possibleValidMoves = ((char)(row+1) + Integer.toString(column)+", ");
             return possibleValidMoves;
         }
         return "No Move Possible, you are standing on the last row";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
