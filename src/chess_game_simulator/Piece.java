@@ -2,8 +2,8 @@ package chess_game_simulator;
 
 public class Piece {
     private final String pieceName;
-    private final char row;
-    private final int column;
+    private  char row;
+    private  int column;
 
     public Piece(String input)
     {
@@ -18,6 +18,7 @@ public class Piece {
         return new Piece(inputParameter);
     }
 
+
     public String getPieceName() {
         return pieceName;
     }
@@ -28,5 +29,13 @@ public class Piece {
 
     public int getColumn() {
         return column;
+    }
+
+    public void setRow(char row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
     }
 }
