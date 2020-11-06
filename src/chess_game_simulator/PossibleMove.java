@@ -91,10 +91,7 @@ public class PossibleMove {
 
     private String QueenMove()
     {
-        String possibleValidMoves = "";
-        possibleValidMoves += BishopMove();
-        possibleValidMoves += RookMove();
-        return possibleValidMoves;
+        return BishopMove() + RookMove(); //REMOVING EXTRA LINES FROM HERE
     }
 
     private String PawnMove()
