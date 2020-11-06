@@ -1,7 +1,7 @@
 package chess_game_simulator;
 
 public class PossibleMove {
-    private Piece piece;
+    private final Piece piece;
 
     public PossibleMove(Piece piece) {
         this.piece = piece;
@@ -11,41 +11,41 @@ public class PossibleMove {
     {
         char row = piece.getRow();
         int column = piece.getColumn();
-        int X[]={-1,-1,-1,0,0,1,1,1};
-        int Y[]={-1,0,1,-1,1,-1,0,1};
-        String s = "";
+        int []X={-1,-1,-1,0,0,1,1,1};
+        int []Y={-1,0,1,-1,1,-1,0,1};
+        String possibleValidMoves="";
         for(int i=0;i<=7;i++)
         {
             int a=row + X[i];
             int b=column + Y[i];
             if(a>='A' && a<='H' && b>=1 && b<=8)
-                s += ((char)a + Integer.toString(b)+" ");
+                possibleValidMoves += ((char)a + Integer.toString(b)+" ");
         }
-        return s;
+        return possibleValidMoves;
     }
 
     private String KnightMove()
     {
         char row = piece.getRow();
         int column = piece.getColumn();
-        int X[]={ 2, 1, -1, -2, -2, -1, 1, 2 };
-        int Y[]={ 1, 2, 2, 1, -1, -2, -2, -1 };
-        String s = "";
+        int []X={ 2, 1, -1, -2, -2, -1, 1, 2 };
+        int []Y={ 1, 2, 2, 1, -1, -2, -2, -1 };
+        String possibleValidMoves = "";
         for(int i=0;i<=7;i++)
         {
             int a=row + X[i];
             int b=column + Y[i];
             if(a>='A' && a<='H' && b>=1 && b<=8)
-                s += ((char)a + Integer.toString(b)+" ");
+                possibleValidMoves += ((char)a + Integer.toString(b)+" ");
         }
-        return s;
+        return possibleValidMoves;
     }
 
     private String BishopMove()
     {
-        String possibleMoves="";
-        char p = piece.getRow();
-        int q = piece.getColumn();
+        String possibleValidMoves="";
+        char row = piece.getRow();
+        int column = piece.getColumn();
 //        for(int i='A';i<='H';i++)
 //        {
 //            for(int j=1;j<=8;j++)
@@ -59,61 +59,53 @@ public class PossibleMove {
         {
             if(i!=0)
             {
-                int a = p+i;
-                int b = q+i;
+                int a = row+i;
+                int b = column+i;
                 if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleMoves += ((char)a + Integer.toString(b) + " ");
+                    possibleValidMoves += ((char)a + Integer.toString(b) + " ");
+                b = column-i;
+                if(a>='A' && a<='H' && b>=1 && b<=8)
+                    possibleValidMoves += ((char)a + Integer.toString(b) + " ");
             }
         }
-        for(int i=-7;i<=7;i++)
-        {
-            if(i!=0)
-            {
-                int a = p+i;
-                int b = q-i;
-                if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleMoves += ((char)a + Integer.toString(b) + " ");
-            }
-        }
-        return possibleMoves;
+        return possibleValidMoves;
     }
 
     private String RookMove()
     {
-        char p = piece.getRow();
-        int q = piece.getColumn();
-        String s = "";
-        int j;
+        char row = piece.getRow();
+        int column = piece.getColumn();
+        String possibleValidMoves = "";
         for(int i=1;i<=8;i++)
         {
-            if(i!=q)
-                s += (p + Integer.toString(i) +" ");
+            if(i!=column)
+                possibleValidMoves += (row + Integer.toString(i) +" ");
         }
         for(int i='A';i<='H';i++)
         {
-            if(i!=p)
-                s += (((char)i) + Integer.toString(q) +" ");
+            if(i!=row)
+                possibleValidMoves += (((char)i) + Integer.toString(column) +" ");
         }
-        return s;
+        return possibleValidMoves;
     }
 
     private String QueenMove()
     {
-        String s = "";
-        s += BishopMove();
-        s += RookMove();
-        return s;
+        String possibleValidMoves = "";
+        possibleValidMoves += BishopMove();
+        possibleValidMoves += RookMove();
+        return possibleValidMoves;
     }
 
     private String PawnMove()
     {
-        String s;
-        char p = piece.getRow();
-        int q = piece.getColumn();
-        if(p+1<='H')
+        String possibleValidMoves;
+        char row = piece.getRow();
+        int column = piece.getColumn();
+        if(row+1<='H')
         {
-            s = ((char)(p+1) + Integer.toString(q)+" ");
-            return s;
+            possibleValidMoves = ((char)(row+1) + Integer.toString(column)+" ");
+            return possibleValidMoves;
         }
         return "No Move Possible";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
                                             // AS VALID VERTICAL DIRECTION MOVE FOR PAWN
@@ -121,7 +113,7 @@ public class PossibleMove {
 
     public String ExpectedPossibleMoves()
     {
-        String outputString = " ";
+        String outputString;
         String pieceName = piece.getPieceName().toLowerCase();
         switch (pieceName)
         {
@@ -144,7 +136,7 @@ public class PossibleMove {
                 outputString = PawnMove();
                 break;
             default:
-                System.out.println("No Valid Piece");
+                outputString = "No Valid Piece";
         }
         return outputString;
     }

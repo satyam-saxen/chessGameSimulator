@@ -1,13 +1,10 @@
 package chess_game_simulator;
 
 public class Piece {
-    private String pieceName;
-    private char row;
-    private int column;
+    private final String pieceName;
+    private final char row;
+    private final int column;
 
-    public Piece() {
-        this.pieceName = null;
-    }
     public Piece(String input)
     {
         String []s = input.split(" ");

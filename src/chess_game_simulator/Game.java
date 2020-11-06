@@ -9,12 +9,7 @@ public class Game {
         if(type.equals("king") || type.equals("queen") || type.equals("horse") || type.equals("bishop")
                 || type.equals("rook") || type.equals("pawn"))
         {
-//            System.out.println(splitArray[1].charAt(1));
-            if(splitArray[1].charAt(0)>='A' && splitArray[1].charAt(0)<='H' && splitArray[1].charAt(1)>='1' && splitArray[1].charAt(1)<='8'){
-                return true;
-            }else{
-                return false;
-            }
+            return splitArray[1].charAt(0) >= 'A' && splitArray[1].charAt(0) <= 'H' && splitArray[1].charAt(1) >= '1' && splitArray[1].charAt(1) <= '8';
         }
         return false;
     }
@@ -22,7 +17,7 @@ public class Game {
     {
 //        System.out.println("Hello World");
         Piece piece;
-        String s = "QuEEn G6";
+        String s = "King G6";
         if(isValidInput(s)) {
             piece = Piece.getPiece(s);
             PossibleMove possibleMove = new PossibleMove(piece);
