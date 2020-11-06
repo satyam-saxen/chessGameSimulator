@@ -9,7 +9,7 @@ public class Piece {
     {
         String []s = input.split(" ");
         this.pieceName = s[0];
-        this.row = s[1].charAt(0);
+        this.row = s[1].toUpperCase().charAt(0);
         this.column = Integer.parseInt(String.valueOf(s[1].charAt(1)));
     }
 

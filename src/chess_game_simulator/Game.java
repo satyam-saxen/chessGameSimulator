@@ -11,7 +11,7 @@ public class Game {
         if(type.equals("king") || type.equals("queen") || type.equals("horse") || type.equals("bishop")
                 || type.equals("rook") || type.equals("pawn"))
         {
-            return splitArray[1].charAt(0) >= 'A' && splitArray[1].charAt(0) <= 'H' && splitArray[1].charAt(1) >= '1' && splitArray[1].charAt(1) <= '8';
+            return splitArray[1].toUpperCase().charAt(0) >= 'A' && splitArray[1].toUpperCase().charAt(0) <= 'H' && splitArray[1].toUpperCase().charAt(1) >= '1' && splitArray[1].toUpperCase().charAt(1) <= '8';
         }
         return false;
     }
