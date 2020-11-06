@@ -1,5 +1,7 @@
 package chess_game_simulator;
 
+import java.util.Scanner;
+
 public class Game {
     private static boolean isValidInput(String input)
     {
@@ -15,17 +17,28 @@ public class Game {
     }
     public static void main(String []args)
     {
-//        System.out.println("Hello World");
-        Piece piece;
-        String s = "King G6";
-        if(isValidInput(s)) {
-            piece = Piece.getPiece(s);
-            PossibleMove possibleMove = new PossibleMove(piece);
-            String output = possibleMove.ExpectedPossibleMoves();
-            System.out.println(output);
-        }else{
-            System.out.println("Please enter valid input String in format like : Type [A-H][1-8]");
+        Scanner scanner = new Scanner(System.in);
+
+        while(true)
+        {
+            System.out.println("Please enter the type of Piece and its Location");
+            System.out.println("Or, press 1 for exit ");
+            String inputString = scanner.nextLine();
+            if(inputString.equals("1"))
+            {
+                break;
+            }
+            System.out.println();
+            if(isValidInput(inputString)){
+                Piece piece = Piece.getPiece(inputString);
+                String outputString = new PossibleMove(piece).ExpectedPossibleMoves();
+                System.out.println(outputString);
+            }else{
+                System.out.println("Type of Piece or its location is incorrect, please try again with correct data");
+            }
+            System.out.println();
         }
+
     }
 
 }
