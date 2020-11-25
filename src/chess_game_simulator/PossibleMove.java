@@ -2,6 +2,7 @@ package chess_game_simulator;
 
 public class PossibleMove {
     private final Piece piece;
+    public static Board board;
 
     public PossibleMove(Piece piece) {
         this.piece = piece;
@@ -10,16 +11,16 @@ public class PossibleMove {
     private String KingMove()
     {
         char row = piece.getRow();
-        int column = piece.getColumn();
+        char column = piece.getColumn();
         int []X={-1,-1,-1,0,0,1,1,1};
         int []Y={-1,0,1,-1,1,-1,0,1};
         String possibleValidMoves="";
-        for(int i=0;i<=7;i++)
+        for(int i=0;i<X.length;i++)
         {
-            int a=row + X[i];
-            int b=column + Y[i];
-            if(a>='A' && a<='H' && b>=1 && b<=8)
-                possibleValidMoves += ((char)a + Integer.toString(b)+", ");
+            char rowIndex = (char) (row + X[i]);
+            char columnIndex= (char) (column + Y[i]);
+            if(isPossibleMove(rowIndex,columnIndex))
+                possibleValidMoves += (rowIndex +""+ columnIndex +", ");
         }
         return possibleValidMoves;
     }
@@ -27,16 +28,16 @@ public class PossibleMove {
     private String KnightMove()
     {
         char row = piece.getRow();
-        int column = piece.getColumn();
+        char column = piece.getColumn();
         int []X={ 2, 1, -1, -2, -2, -1, 1, 2 };
         int []Y={ 1, 2, 2, 1, -1, -2, -2, -1 };
         String possibleValidMoves = "";
-        for(int i=0;i<=7;i++)
+        for(int i=0;i<X.length;i++)
         {
-            int a=row + X[i];
-            int b=column + Y[i];
-            if(a>='A' && a<='H' && b>=1 && b<=8)
-                possibleValidMoves += ((char)a + Integer.toString(b)+", ");
+            char rowIndex= (char) (row + X[i]);
+            char columnIndex= (char) (column + Y[i]);
+            if(isPossibleMove(rowIndex,columnIndex))
+                possibleValidMoves += (rowIndex+""+columnIndex+", ");
         }
         return possibleValidMoves;
     }
@@ -55,17 +56,19 @@ public class PossibleMove {
 //            }
 //        }
 //        s += " $ ";
-        for(int i=-7;i<=7;i++)
+        int minRangeOnBoard = -7;
+        int maxRangeOnBoard = 7;
+        for(int index=minRangeOnBoard;index<=maxRangeOnBoard;index++)
         {
-            if(i!=0)
+            if(index!=0)
             {
-                int a = row+i;
-                int b = column+i;
-                if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleValidMoves += ((char)a + Integer.toString(b) + ", ");
-                b = column-i;
-                if(a>='A' && a<='H' && b>=1 && b<=8)
-                    possibleValidMoves += ((char)a + Integer.toString(b) + ", ");
+                char rowIndex = (char) (row+index);
+                char columnIndex = (char) (column+index);
+                if(isPossibleMove(rowIndex,columnIndex))
+                    possibleValidMoves += (rowIndex+""+columnIndex+", ");
+                columnIndex = (char) (column-index);
+                if(isPossibleMove(rowIndex,columnIndex))
+                    possibleValidMoves += (rowIndex+""+columnIndex+", ");
             }
         }
         return possibleValidMoves;
@@ -74,17 +77,17 @@ public class PossibleMove {
     private String RookMove()
     {
         char row = piece.getRow();
-        int column = piece.getColumn();
+        char column = piece.getColumn();
         String possibleValidMoves = "";
-        for(int i=1;i<=8;i++)
+        for(char columnIndex=board.getColumnLowerRange();columnIndex<=board.getColumnHigherRange();columnIndex++)
         {
-            if(i!=column)
-                possibleValidMoves += (row + Integer.toString(i) +", ");
+            if(columnIndex!=column)
+                possibleValidMoves += (row + "" +columnIndex  +", ");
         }
-        for(int i='A';i<='H';i++)
+        for(char rowIndex=board.getRowLowerRange();rowIndex<=board.getRowHigherRange();rowIndex++)
         {
-            if(i!=row)
-                possibleValidMoves += (((char)i) + Integer.toString(column) +", ");
+            if(rowIndex!=row)
+                possibleValidMoves += (rowIndex +"" +column +", ");
         }
         return possibleValidMoves;
     }
@@ -98,10 +101,10 @@ public class PossibleMove {
     {
         String possibleValidMoves;
         char row = piece.getRow();
-        int column = piece.getColumn();
-        if(row+1<='H')
+        char column = piece.getColumn();
+        if(isPossibleMove((char) (row+1),column))
         {
-            possibleValidMoves = ((char)(row+1) + Integer.toString(column)+", ");
+            possibleValidMoves = ((char)(row+1) +""+column);
             return possibleValidMoves;
         }
         return "No Move Possible, you are standing on the last row";  //ASSUMPTION - WE ONLY CONSIDER UPWARD DIRECTION
@@ -112,6 +115,7 @@ public class PossibleMove {
     {
         String outputString;
         String pieceName = piece.getPieceName().toLowerCase();
+//        System.out.println("Heyy I'm here");
         switch (pieceName)
         {
             case "king":
@@ -136,6 +140,10 @@ public class PossibleMove {
                 outputString = "No Valid Piece";
         }
         return outputString;
+    }
+    private boolean isPossibleMove(char rowIndex, char columnIndex)
+    {
+        return(rowIndex>=board.getRowLowerRange() && rowIndex<=board.getRowHigherRange() && columnIndex>=board.getColumnLowerRange() && columnIndex<=board.getColumnHigherRange());
     }
 
 }

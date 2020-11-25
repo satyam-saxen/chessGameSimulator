@@ -3,14 +3,14 @@ package chess_game_simulator;
 public class Piece {
     private final String pieceName;
     private  char row;
-    private  int column;
+    private  char column;
 
     public Piece(String input)
     {
         String []s = input.split(" ");
         this.pieceName = s[0];
         this.row = s[1].toUpperCase().charAt(0);
-        this.column = Integer.parseInt(String.valueOf(s[1].charAt(1)));
+        this.column = s[1].toUpperCase().charAt(1);
     }
 
     public static Piece getPiece(String inputParameter)
@@ -27,7 +27,7 @@ public class Piece {
         return row;
     }
 
-    public int getColumn() {
+    public char getColumn() {
         return column;
     }
 
@@ -35,7 +35,7 @@ public class Piece {
         this.row = row;
     }
 
-    public void setColumn(int column) {
+    public void setColumn(char column) {
         this.column = column;
     }
 }

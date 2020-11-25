@@ -20,11 +20,7 @@ public class RunChess {
     }
     public void run()
     {
-        Board board = new Board();
-        board.setRowLowerRange('A');
-        board.setRowHigherRange('H');
-        board.setColumnLowerRange('1');
-        board.setColumnHigherRange('8');
+        Board board = new Board('A','H','1','8');
 
         Scanner scanner = new Scanner(System.in);
         boolean playChess = true;
@@ -36,9 +32,9 @@ public class RunChess {
             {
                 playChess = false;
             }else {
-                System.out.println();
                 if (isValidInput(inputString,board)) {
                     Piece piece = Piece.getPiece(inputString);
+                    PossibleMove.board = board;
                     String outputString = new PossibleMove(piece).ExpectedPossibleMoves();
                     System.out.println(outputString);
                 } else {

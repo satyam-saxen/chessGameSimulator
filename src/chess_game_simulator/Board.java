@@ -6,6 +6,13 @@ public class Board {
     private char columnLowerRange;
     private char columnHigherRange;
 
+    public Board(char rowLowerRange, char rowHigherRange, char columnLowerRange, char columnHigherRange) {
+        this.rowLowerRange = rowLowerRange;
+        this.rowHigherRange = rowHigherRange;
+        this.columnLowerRange = columnLowerRange;
+        this.columnHigherRange = columnHigherRange;
+    }
+
     public char getRowLowerRange() {
         return rowLowerRange;
     }
