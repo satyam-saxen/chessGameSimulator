@@ -1,27 +1,22 @@
 package chess_game_simulator;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class RunChess {
-    private boolean isValidInput(String input,Board board)
-    {
-        String []splitArray = input.split(" ");
-        if(splitArray.length>1)
-        {
-            String type = splitArray[0].toLowerCase();
+    Map<String,PieceType> PieceMap = new HashMap<>();
 
-            if(type.equals("king") || type.equals("queen") || type.equals("horse") || type.equals("bishop")
-                    || type.equals("rook") || type.equals("pawn"))
-            {
-                return splitArray[1].toUpperCase().charAt(0) >= board.getRowLowerRange() && splitArray[1].toUpperCase().charAt(0) <= board.getRowHigherRange() && splitArray[1].toUpperCase().charAt(1) >= board.getColumnLowerRange() && splitArray[1].toUpperCase().charAt(1) <= board.getColumnHigherRange();
-            }
-        }
-        return false;
-    }
     public void run()
     {
         Board board = new Board('A','H','1','8');
-
+        Validation.board = board;
+        PieceMap.put("king",new King());
+        PieceMap.put("horse",new Knight());
+        PieceMap.put("bishop",new Bishop());
+        PieceMap.put("rook",new Rook());
+        PieceMap.put("queen",new Queen());
+        PieceMap.put("pawn",new Pawn());
         Scanner scanner = new Scanner(System.in);
         boolean playChess = true;
         do{
@@ -32,10 +27,12 @@ public class RunChess {
             {
                 playChess = false;
             }else {
-                if (isValidInput(inputString,board)) {
-                    Piece piece = Piece.getPiece(inputString);
-                    PossibleMove.board = board;
-                    String outputString = new PossibleMove(piece).ExpectedPossibleMoves();
+                if (Validation.isValidInput(inputString)) {
+                    String []input = inputString.split(" ");
+                    PieceType pieceType = PieceMap.get(input[0].toLowerCase());
+                    pieceType.setRow(input[1].toUpperCase().charAt(0));
+                    pieceType.setColumn(input[1].toUpperCase().charAt(1));
+                    String outputString = pieceType.PossibleMoves(board);
                     System.out.println(outputString);
                 } else {
                     System.out.println("Type of Piece or its location is incorrect, please try again with correct data");
