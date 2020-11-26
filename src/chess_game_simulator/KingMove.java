@@ -2,7 +2,7 @@ package chess_game_simulator;
 
 public class KingMove implements MoveType {
     @Override
-    public String moves(char row, char column) {
+    public String moves(char row, char column,Board board) {
         int []X={-1,-1,-1,0,0,1,1,1};
         int []Y={-1,0,1,-1,1,-1,0,1};
         String possibleValidMoves="";

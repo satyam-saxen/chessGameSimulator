@@ -2,8 +2,7 @@ package chess_game_simulator;
 
 public class KnightMove implements MoveType{
     @Override
-    public String moves(char row, char column) {
-        System.out.println("Hey I'm here");
+    public String moves(char row, char column,Board board) {
         int []X={ 2, 1, -1, -2, -2, -1, 1, 2 };
         int []Y={ 1, 2, 2, 1, -1, -2, -2, -1 };
         String possibleValidMoves = "";
