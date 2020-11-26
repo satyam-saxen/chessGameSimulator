@@ -1,6 +1,7 @@
 package chess_game_simulator;
 
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
 
@@ -9,6 +10,7 @@ public class Game {
 
         RunChess runChess = new RunChess();
         runChess.run();
+
 
     }
 
